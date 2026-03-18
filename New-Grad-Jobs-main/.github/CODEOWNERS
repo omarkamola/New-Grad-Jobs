@@ -1,0 +1,21 @@
+# CODEOWNERS
+# @ambicuity is auto-requested as reviewer on every PR.
+# This is a solo-maintained repo — all paths map to the same maintainer.
+
+# Default: everything requires maintainer review
+*                               @ambicuity
+
+# Core scraper and configuration
+scripts/update_jobs.py          @ambicuity
+config.yml                      @ambicuity
+
+# CI/CD — workflow changes need explicit maintainer sign-off
+.github/workflows/              @ambicuity
+.github/CODEOWNERS              @ambicuity
+
+# Docs and website
+docs/                           @ambicuity
+CONTRIBUTING.md                 @ambicuity
+
+# Security policy
+SECURITY.md                     @ambicuity

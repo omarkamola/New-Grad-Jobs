@@ -1,0 +1,46 @@
+version: 2
+
+updates:
+  # GitHub Actions ecosystem — grouped to reduce PR noise for the sole maintainer
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "chore(ci)"
+    labels:
+      - "ci-cd"
+      - "automated pr"
+    open-pull-requests-limit: 3
+    groups:
+      # All Actions minor/patch updates in one PR; major bumps arrive individually
+      github-actions-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Python pip ecosystem — grouped to cut from N PRs to 1 PR per week
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "chore(deps)"
+    labels:
+      - "dependencies"
+      - "automated pr"
+    open-pull-requests-limit: 2
+    groups:
+      # Bundle all non-major pip updates; major versions still reviewed individually
+      pip-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+    # Ignore playwright minor/patch updates — frequent breaking changes
+    ignore:
+      - dependency-name: "playwright"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
